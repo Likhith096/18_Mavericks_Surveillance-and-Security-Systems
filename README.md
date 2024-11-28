@@ -56,3 +56,11 @@ This project is licensed under [Your License Here].
 ---
 
 Stay safe with AI-powered home security!
+
+
+
+Flow of the Model
+
+
+![Screenshot 2024-11-28 082327](https://github.com/user-attachments/assets/e6a695e5-701f-421e-93fc-896b25731fc7)
+
