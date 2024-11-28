@@ -50,8 +50,7 @@ The AI-Powered Home Security System is designed to provide an innovative and pra
 ## Contributing
 Feel free to contribute to this project by reporting issues, suggesting features, or submitting pull requests.
 
-## License
-This project is licensed under [Your License Here].
+
 
 ---
 
