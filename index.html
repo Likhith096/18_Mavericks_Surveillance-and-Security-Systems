@@ -1,0 +1,330 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Safety Monitoring System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #444; }
+        .status-container { margin: 20px 0; }
+        .meter-container {
+            width: 300px;
+            margin: 20px auto;
+        }
+        .meter {
+            width: 100%;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background-color: green;
+            border-radius: 10px;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+        .alert-info {
+            margin: 20px auto;
+            padding: 15px;
+            max-width: 600px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .button { padding: 10px 20px; margin: 10px; background: #007BFF; color: #fff; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Sound Safety Monitoring System</h1>
+    <div class="status-container">
+        <p>Status: <span id="status">Loading...</span></p>
+    </div>
+
+    <div class="meter-container">
+        <div class="meter">
+            <div id="meter-fill" class="meter-fill"></div>
+        </div>
+        <p>Threat Level: <span id="threat-label">N/A</span></p>
+    </div>
+
+    <div class="alert-info" id="alert-info" style="display: none;">
+        <h3>Alert Details</h3>
+        <p><strong>Sound Detected:</strong> <span id="sound-label">N/A</span></p>
+        <p><strong>Confidence Level:</strong> <span id="confidence">N/A</span></p>
+    </div>
+
+    <button class="button" onclick="dismissAlert()">Dismiss Alerts</button>
+    <button class="button" onclick="startMonitoring()">Start Monitoring</button>
+    <button class="button" onclick="stopMonitoring()">Stop Monitoring</button>
+    <br>
+    <input type="text" class="text" placeholder="Enter phone number" />
+
+    <script>
+        const statusSpan = document.getElementById('status');
+        const meterFill = document.getElementById('meter-fill');
+        const threatLabel = document.getElementById('threat-label');
+        const alertInfo = document.getElementById('alert-info');
+        const soundLabel = document.getElementById('sound-label');
+        const confidence = document.getElementById('confidence');
+
+        function updateStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    statusSpan.textContent = data.monitoring ? 'Monitoring...' : 'Stopped';
+
+                    if (data.alert) {
+                        const threat = data.alert.threat_level.toLowerCase();
+                        const confidenceValue = (data.alert.confidence * 100).toFixed(2);
+                        soundLabel.textContent = data.alert.sound_label;
+                        confidence.textContent = `${confidenceValue}%`;
+                        alertInfo.style.display = 'block';
+
+                        if (threat === 'low') {
+                            meterFill.style.width = '33%';
+                            meterFill.style.backgroundColor = 'green';
+                            threatLabel.textContent = 'Low';
+                        } else if (threat === 'medium') {
+                            meterFill.style.width = '66%';
+                            meterFill.style.backgroundColor = 'yellow';
+                            threatLabel.textContent = 'Medium';
+                        } else if (threat === 'high') {
+                            meterFill.style.width = '100%';
+                            meterFill.style.backgroundColor = 'red';
+                            threatLabel.textContent = 'High';
+                        }
+                    } else {
+                        alertInfo.style.display = 'none';
+                        meterFill.style.width = '0%';
+                        threatLabel.textContent = 'N/A';
+                    }
+                });
+        }
+
+        function dismissAlert() {
+            fetch('/dismiss_alert', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .then(updateStatus);
+        }
+
+        function startMonitoring() {
+            fetch('/start_monitoring', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .then(updateStatus);
+        }
+
+        function stopMonitoring() {
+            fetch('/stop_monitoring', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .then(updateStatus);
+        }
+
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+<!-- RealTime HTML is below -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Audio Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+    <script>
+        // Helper function to display a message in an alert box
+        function showMessage(message) {
+            const alertBox = document.getElementById('alert-box');
+            alertBox.innerText = message;
+        }
+
+        // Function to record audio
+        async function recordAudio() {
+            try {
+                const response = await fetch('/record', { method: 'POST' });
+                const result = await response.json();
+                if (result.message) {
+                    showMessage(result.message);
+                }
+            } catch (error) {
+                showMessage('Error: Unable to record audio. Please try again.');
+            }
+        }
+
+        // Function to predict the audio label
+        async function predictAudio() {
+            try {
+                const response = await fetch('/predict', { method: 'POST' });
+                const result = await response.json();
+
+                if (result.error) {
+                    showMessage(result.error);
+                } else {
+                    showMessage('Predicted Label: ' + result.predicted_label);
+
+                    // Highlight unsafe sounds for better user feedback
+                    if (result.predicted_label.toLowerCase() === 'unsafe') {
+                        alert('⚠️ Alert: Unsafe sound detected! Notifications triggered.');
+                    }
+                }
+            } catch (error) {
+                showMessage('Error: Unable to make prediction. Please try again.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-Time Audio Prediction</h1>
+        <button onclick="recordAudio()">Record Audio</button>
+        <button onclick="predictAudio()">Predict Label</button>
+
+        <div id="alert-box" class="alert"></div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Audio Prediction</title>
+    <script>
+        async function recordAudio() {
+            const response = await fetch('/record', { method: 'POST' });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function predictAudio() {
+            const response = await fetch('/predict', { method: 'POST' });
+            const result = await response.json();
+            if (result.error) {
+                alert(result.error);
+            } else {
+                alert('Predicted Label: ' + result.predicted_label);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Real-Time Audio Prediction</h1>
+    <button onclick="recordAudio()">Record Audio</button>
+    <button onclick="predictAudio()">Predict Label</button>
+</body>
+</html> -->
