@@ -17,22 +17,15 @@ The AI-Powered Home Security System is designed to provide an innovative and pra
 4. **Panic Mode**  
    - Activates an emergency alert system for immediate response.
 
-5. **Directional Sound Localization**  
-   - Provides basic sound localization to identify the source of the noise.
 
-6. **Adaptive Learning**  
+5. **Adaptive Learning**  
    - Continuously improves detection accuracy by learning from user feedback and historical data.
 
-7. **User Interface (UI)**  
+6. **User Interface (UI)**  
    - Offers a simple and intuitive interface for monitoring and managing alerts.
 
-8. **Time-Based Noise Differentiation**  
-   - Differentiates between normal and suspicious noises based on the time of day.
 
-9. **Mobile Integration (Optional)**  
-   - If connected to mobile devices:
-     - Uses GPS data to send location-based alerts.  
-     - Provides directions to the nearest exits or safe zones.
+
 
 ## Getting Started
 1. **Setup and Installation**  
@@ -51,6 +44,8 @@ The AI-Powered Home Security System is designed to provide an innovative and pra
 - Advanced sound classification using deep learning.  
 - Integration with smart home devices (e.g., cameras, door locks).  
 - Multi-device synchronization for broader coverage.
+- Time-Based Noise Differentiation
+- Adaptive learning
 
 ## Contributing
 Feel free to contribute to this project by reporting issues, suggesting features, or submitting pull requests.
